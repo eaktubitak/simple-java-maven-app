@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('Setup Maven') {
+            steps {
+                // Maven komutunu global olarak kullanılabilir hale getir
+                sh 'cd /usr/bin/ && ln -s /opt/maven/bin/mvn mvn'
+            }
+        }
         stage('Build') {
             steps {
                 sh '/opt/maven/bin/mvn -B -DskipTests clean package'
